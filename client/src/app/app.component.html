@@ -1,0 +1,13 @@
+<h1>{{title}}</h1>
+
+<ul>
+    <!--ANGULER 16 ÖNCESİ ngFor ile yapılırken ama bunu yaparken component.ts import etmek gerekiyor
+        <li *ngFor="let user of users">
+        {{user.id}} - {{user.userName}}
+    </li>-->
+    @for (user of users; track user.id) {
+        <li>
+            {{user.id}} - {{user.userName}}
+        </li>
+    }
+</ul>
