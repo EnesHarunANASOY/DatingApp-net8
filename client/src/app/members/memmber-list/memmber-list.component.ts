@@ -12,17 +12,15 @@ import { MemberCardComponent } from "../member-card/member-card.component";
 })
 export class MemmberListComponent implements OnInit {
 
-  private memberService = inject(MembersService);
-  membersOnHome : Member[] = [];
+  memberService = inject(MembersService);
 
   ngOnInit(): void{
 
+    if(this.memberService.members().length===0)
     this.loadMembers();
   }
 
   loadMembers(){
-    this.memberService.getMembers().subscribe({
-      next: membersAreNExt => this.membersOnHome = membersAreNExt
-    })
+    this.memberService.getMembers()
   }
 }

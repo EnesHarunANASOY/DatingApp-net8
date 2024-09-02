@@ -1,5 +1,5 @@
 <div class="row">
-    @for (memberOnFor of membersOnHome; track memberOnFor.id) {
+    @for (memberOnFor of memberService.members(); track memberOnFor.id) {
     <div class="col-2">
        <app-member-card [memberOnCard]="memberOnFor"></app-member-card>
     </div>
