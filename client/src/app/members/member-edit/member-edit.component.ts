@@ -5,11 +5,12 @@ import { MembersService } from '../../_services/members.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [TabsModule, FormsModule],
+  imports: [TabsModule, FormsModule, PhotoEditorComponent],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.css'
 })
@@ -32,7 +33,6 @@ export class MemberEditComponent implements OnInit {
   loadMember() {
     const user = this.accountService.currentUser();
     if (!user) return;
-
     this.memberService.getMember(user.username).subscribe({
       next: member => this.member = member
     })
@@ -47,6 +47,9 @@ export class MemberEditComponent implements OnInit {
 
       }
     })
+  }
 
+  onMemberChange(event: Member){
+    this.member = event;
   }
 }

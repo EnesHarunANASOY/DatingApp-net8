@@ -17,6 +17,7 @@ export class RegisterComponent {
   model : any = {}
 
   register(){
+    console.log("HEREE BEFORE")
     this.accountService.register(this.model).subscribe({
       next: response => {
         console.log(response);
