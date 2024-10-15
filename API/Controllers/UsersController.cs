@@ -52,8 +52,6 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
 
           if(user == null) return BadRequest("Cannot update user");
 
-          
-
           var result = await photoService.AddPhotoAsync(file);
           if(result.Error !=null) return BadRequest(result.Error.Message);
 
@@ -62,6 +60,8 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
             Url=result.SecureUrl.AbsoluteUri,
             PublicId=result.PublicId,
           };
+
+          if(user.Photos.Count == 0) photo.IsMain=true;
 
           user.Photos.Add(photo);
 
