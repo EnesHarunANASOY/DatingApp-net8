@@ -2,7 +2,6 @@
 
 public class MemberDto
 {
-
     public int Id { get; set; }
     public string? Username { get; set; }
     public int Age { get; set; }
@@ -17,5 +16,4 @@ public class MemberDto
     public string? City { get; set; }
     public string? Country { get; set; }
     public List<PhotoDto>? Photos { get; set; } = [];
-
 }
