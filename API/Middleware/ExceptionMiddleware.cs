@@ -13,8 +13,7 @@ public class ExceptionMiddleware (RequestDelegate next, ILogger<ExceptionMiddlew
             await next(context);
         }
         catch (Exception ex)
-        {
-            
+        {    
             logger.LogError(ex, ex.Message);
             context.Response.ContentType="application/json";
             context.Response.StatusCode=(int)HttpStatusCode.InternalServerError;
@@ -28,9 +27,7 @@ public class ExceptionMiddleware (RequestDelegate next, ILogger<ExceptionMiddlew
             };
 
             var json = JsonSerializer.Serialize(response,options);
-
             await context.Response.WriteAsync(json);
-            
         }
 
     }

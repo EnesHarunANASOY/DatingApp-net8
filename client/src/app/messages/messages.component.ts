@@ -15,7 +15,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
   styleUrl: './messages.component.css'
 })
 export class MessagesComponent {
-
   messageService = inject(MessageService);
   container = 'Inbox';
   pageNumber = 1;
@@ -23,18 +22,21 @@ export class MessagesComponent {
   isOutbox = this.container ==='Outbox';
 
   ngOnInit(): void{
-
     this.loadMessages();
-
   }
 
-  loadMessages() {
+  loadMessages(){
     this.messageService.getMessages(this.pageNumber, this.pageSize, this.container);
   }
 
   getRoute(message: Message){
-      if(this.container ==='Outbox')return `/members/${message.recipientUsername}`;
-      else return `/members/${message.senderUsername}`;
+      if(this.container ==='Outbox')
+      {
+        return `/members/${message.recipientUsername}`;
+      }
+        
+      else 
+        return `/members/${message.senderUsername}`;
   }
 
   pageChanged(event : any){
@@ -57,5 +59,4 @@ export class MessagesComponent {
         })
     })
   }
-
 }

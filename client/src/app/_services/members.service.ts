@@ -8,6 +8,7 @@ import { UserParams } from '../_models/userParams';
 import { of } from 'rxjs';
 import { AccountService } from './account.service';
 import { setPaginatedResponse, setPaginationHeaders } from './paginationHelper';
+import { Message } from '../_models/message';
 
 
 @Injectable({
@@ -18,16 +19,17 @@ export class MembersService {
   private http = inject(HttpClient);
   private accountService = inject(AccountService);
   baseUrl =environment.apiUrl;
+  hubUrl =environment.hubsUrl;
   paginatedResult = signal<PaginatedResult<Member[]> | null>(null);
   memberCache = new Map();
   user = this.accountService.currentUser();
   userParams = signal<UserParams>(new UserParams(this.user))
-
+  messageThread = signal<Message[]>([]);
 
   resetUserParams(){
     this.userParams.set(new UserParams(this.user));
   }
-  
+
   getMembers()
   {
     console.log(this.memberCache.values());
