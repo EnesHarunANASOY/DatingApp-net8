@@ -22,7 +22,6 @@ export class NavComponent {
   model : any = {};
 
   login(){
-    console.log("HERERE AFTERRRRRR")
     this.accountService.login(this.model).subscribe({
       next: _ => {
         this.router.navigateByUrl('/members')

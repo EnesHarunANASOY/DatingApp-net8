@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { LikesService } from '../_services/likes.service';
-import { Member } from '../_models/member';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
 import { MemberCardComponent } from "../members/member-card/member-card.component";
@@ -21,7 +20,7 @@ export class ListsComponent {
   pageSize = 5;
 
   ngOnInit() : void {
-    this.loadLikes();
+   this.loadLikes();
   }
   
   getTitle(){

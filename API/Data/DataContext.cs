@@ -59,7 +59,5 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<AppUser, 
         .HasOne(s=>s.Sender)
         .WithMany(x=>x.MessagesSent)
         .OnDelete(DeleteBehavior.Restrict);
-
-
     }
 }

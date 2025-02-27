@@ -71,6 +71,8 @@ export class MemmberDetailComponent implements OnInit, OnDestroy{
   }
   
   onTabActicated(data: TabDirective) {
+    console.log("Data is ", data)
+    console.log("Member is  " , this.member)
     this.activeTab = data;
     this.router.navigate([], {
       relativeTo:this.route,

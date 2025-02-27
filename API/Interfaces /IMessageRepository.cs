@@ -17,7 +17,8 @@ public interface IMessageRepository
 
     Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername);
 
-    Task<bool> SaveAllAsync();
+    //Removed afer added UnitofWork
+    //Task<bool> SaveAllAsync();
 
     void AddGroup(Group group);
 
