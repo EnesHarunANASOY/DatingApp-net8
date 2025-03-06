@@ -4,7 +4,6 @@ using System.Text;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using SQLitePCL;
 
 namespace API;
 

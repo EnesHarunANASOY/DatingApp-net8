@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { User } from '../_models/user';
 import { map, retry } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { LikesService } from './likes.service';
 import { PresenceService } from './presence.service';
 

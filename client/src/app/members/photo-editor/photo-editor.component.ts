@@ -54,8 +54,9 @@ export class PhotoEditorComponent implements OnInit {
         const updatedMember = {...this.member()}
         updatedMember.photoUrl=photo.url;
         updatedMember.photos.forEach(p=> {
+          //p.isMain=p.id === photo.id;
           if(p.isMain) p.isMain=false;
-          if(p.id=== photo.id) p.isMain=false;
+         if(p.id=== photo.id) p.isMain=true;
         });
         this.memberChange.emit(updatedMember);
       }

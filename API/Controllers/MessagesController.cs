@@ -1,6 +1,5 @@
 using System;
 using System.Net.Http.Headers;
-using API.Data.Migrations;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
