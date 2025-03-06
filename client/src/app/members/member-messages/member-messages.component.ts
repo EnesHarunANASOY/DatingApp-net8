@@ -11,35 +11,37 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './member-messages.component.css'
 })
 export class MemberMessagesComponent implements AfterViewChecked {
- 
+
   @ViewChild('messageForm') messageForm?: NgForm;
-  @ViewChild('scrollChat') scrollContiner?:any; 
+  @ViewChild('scrollChat') scrollContiner?: any;
   messageService = inject(MessageService);
   username = input.required<string>();
   messageContent = '';
+  loading = false;
 
- /* sendMessage(){
-    this.messageService.sendMessage(this.username(), this.messageContent).subscribe({
-      next: message => {
-        this.messageForm?.reset();
-      }
-    })
-  }*/
+  /* sendMessage(){
+     this.messageService.sendMessage(this.username(), this.messageContent).subscribe({
+       next: message => {
+         this.messageForm?.reset();
+       }
+     })
+   }*/
 
-    ngAfterViewChecked(): void {
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom() {
+    if (this.scrollContiner) {
+      this.scrollContiner.nativeElement.scrollTop = this.scrollContiner.nativeElement.scrollHeight;
+    }
+  }
+
+  sendMessage() {
+    this.loading = true;
+    this.messageService.sendMessage(this.username(), this.messageContent).then(() => {
+      this.messageForm?.reset();
       this.scrollToBottom();
-    }
-
-    private scrollToBottom(){
-      if(this.scrollContiner){
-        this.scrollContiner.nativeElement.scrollTop = this.scrollContiner.nativeElement.scrollHeight;
-      }
-    }
-
-    sendMessage(){
-      this.messageService.sendMessage(this.username(), this.messageContent).then(()=>{
-        this.messageForm?.reset();
-        this.scrollToBottom();
-      })
-    }
+    }).finally(()=>this.loading=false);
+  }
 }

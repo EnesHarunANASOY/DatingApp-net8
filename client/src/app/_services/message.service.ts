@@ -8,6 +8,7 @@ import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@micros
 import { User } from '../_models/user';
 import { group } from '@angular/animations';
 import { Group } from '../_models/group';
+import { BusyService } from './busy.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,13 @@ export class MessageService {
   hubUrl=environment.hubsUrl;
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
+  private busyService = inject(BusyService);
   hubConnection?: HubConnection;
   paginatedResult = signal<PaginatedResult<Message[]> | null>(null);
   messageThread = signal<Message[]>([]);
 
   createHubConnection(user: User, otherUserName: string){
- 
+      this.busyService.busy();
      this.hubConnection = new HubConnectionBuilder()
      .withUrl(this.hubUrl + 'message?user=' +otherUserName, {
        accessTokenFactory: () => user.token
@@ -29,7 +31,9 @@ export class MessageService {
      .withAutomaticReconnect()
      .build();
  
-     this.hubConnection.start().catch(error => console.log(error))
+     this.hubConnection.start()
+     .catch(error => console.log(error))
+     .finally(()=>this.busyService.idle());
  
      this.hubConnection.on('ReceiveMessageThread', messages =>{
        this.messageThread.set(messages)
